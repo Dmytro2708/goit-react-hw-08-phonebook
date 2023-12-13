@@ -6,7 +6,7 @@ import { NameInput } from './NameInput/NameInput';
 import { Filter } from './Filter/Filter';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
