@@ -1,28 +1,56 @@
-import { GlobalStyle } from './GlobalStyle';
-import { Container } from './GlobalStyle';
-
-import { Contacts } from './Contacts/Contacts';
-import { NameInput } from './NameInput/NameInput';
-import { Filter } from './Filter/Filter';
+import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts } from 'redux/contacts/operations';
+import { lazy, useEffect } from 'react';
+import { refreshUser } from 'redux/auth/operations';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { useAuth } from 'hooks';
+import { Layout } from './Layout';
+
+const Home = lazy(() => import('pages/HomePage'));
+const Register = lazy(() => import('pages/RegisterPage'));
+const Login = lazy(() => import('pages/LoginPage'));
+const Contacts = lazy(() => import('pages/ContactsPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    <Container>
-      <h1>Phonebook</h1>
-      <NameInput />
-      <h2>Contacts</h2>
-      <Filter />
-      <Contacts />
-      <GlobalStyle />
-    </Container>
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/login" component={<Register />} />
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+          <Route path="*" element={<Home />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
