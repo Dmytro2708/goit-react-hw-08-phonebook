@@ -3,10 +3,10 @@ import { Helmet } from 'react-helmet';
 
 const styles = {
   container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
+        display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: '30px',
   },
   title: {
     fontWeight: 500,
@@ -21,8 +21,8 @@ const HomePage = () => {
       <Helmet>
         <title>Home page</title>
       </Helmet>
-      <h1 style={styles.title}>Create your contact book</h1>
-      <RiContactsBookLine fill="#ff923cba" fontSize="2em" />
+      <h1 style={styles.title}>Create your contact book </h1>
+      <RiContactsBookLine fill="#ff923cba" fontSize="80" />
     </div>
   );
 };

@@ -24,6 +24,7 @@ export const ContactEl = styled.li`
     background-color: orange;
     border-radius: 5px;
     border: none;
+    box-shadow: 0 1px 7px grey;
     &:hover {
         background-color: blueviolet;
         color: #fff;
