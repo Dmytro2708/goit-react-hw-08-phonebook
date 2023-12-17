@@ -5,6 +5,7 @@ import { Container } from 'components/GlobalStyle';
 import { Contacts } from 'components/Contacts/Contacts';
 import { Filter } from 'components/Filter/Filter';
 import { NameInput } from 'components/NameInput/NameInput';
+import { Helmet } from 'react-helmet';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,9 @@ const ContactsPage = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Contacts</title>
+      </Helmet>
       <h1>Phonebook</h1>
       <NameInput />
       <h2>Contacts</h2>

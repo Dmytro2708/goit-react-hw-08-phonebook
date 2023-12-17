@@ -1,4 +1,5 @@
 import { RiContactsBookLine } from 'react-icons/ri';
+import { Helmet } from 'react-helmet';
 
 const styles = {
   container: {
@@ -17,7 +18,10 @@ const styles = {
 const HomePage = () => {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}> Contacts manager welcome page</h1>
+      <Helmet>
+        <title>Home page</title>
+      </Helmet>
+      <h1 style={styles.title}>Create your contact book</h1>
       <RiContactsBookLine fill="#ff923cba" fontSize="2em" />
     </div>
   );
